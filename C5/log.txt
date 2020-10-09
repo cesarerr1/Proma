@@ -1,0 +1,4 @@
+
+00:36:07 - Cargo login
+00:36:13 - Cargo Bienvenida
+00:36:13 - Entrando al CAD

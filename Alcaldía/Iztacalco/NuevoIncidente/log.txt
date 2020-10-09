@@ -1,0 +1,8 @@
+
+17:31:35 - Cargo login
+17:31:38 - Cargo ingreso
+17:32:02 - Nuevo incidente
+17:33:07 - Seleciono la colonia
+17:33:32 - Genero el evento
+17:33:42 - Termino por completo
+17:33:43 - Nuevo incidente
