@@ -31,7 +31,7 @@ def archivo_log_tiempos(text):
 
 class UntitledTestCase(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r"C:\pythonchrome\python.exe")
+        self.driver = webdriver.Chrome("C:\dchrome\chromedriver.exe")
         self.driver.set_window_size(1400, 1000)
         self.driver.implicitly_wait(30)
         self.verificationErrors = []
@@ -39,7 +39,7 @@ class UntitledTestCase(unittest.TestCase):
 
     def test_untitled_test_case(self):
         driver = self.driver
-        host = "http://demos-promad.opensystems.mx:9191"
+        host = "http://52.9.236.138:9596"
         driver.get(host)
         now = datetime.now()
 
@@ -51,7 +51,7 @@ class UntitledTestCase(unittest.TestCase):
             archivo_log_tiempos("No cargo login")
 
 
-        driver.find_element_by_id("mat-input-0").send_keys("CROJAS")
+        driver.find_element_by_id("mat-input-0").send_keys("DEV02")
         time.sleep(1)
         driver.find_element_by_id("mat-input-1").send_keys("C5")
         time.sleep(1)
@@ -63,7 +63,7 @@ class UntitledTestCase(unittest.TestCase):
 
 
         try:
-            bienvenida = WebDriverWait(driver, 20).until(
+            bienvenida = WebDriverWait(driver, 30).until(
                 EC.visibility_of_all_elements_located((By.ID, "icnAtencion")))
             archivo_log_tiempos("Cargo Bienvenida")
         except (RuntimeError, TypeError, NameError):
@@ -78,15 +78,15 @@ class UntitledTestCase(unittest.TestCase):
         while i <= 1:
             time.sleep(40)
 
-            driver.find_element_by_id("mat-input-3").send_keys("5525194378")
+            driver.find_element_by_id("mat-input-10").send_keys("5525194378")
             time.sleep(1)
-            driver.find_element_by_id("mat-input-3").send_keys(Keys.CONTROL + Keys.ENTER)
+            driver.find_element_by_id("mat-input-10").send_keys(Keys.CONTROL + Keys.ENTER)
             time.sleep(2)
             archivo_log_tiempos("Entro la llamada")
 
             #Ingresando al iframe de la barra de herramientas
             driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='siga']"))
-            time.sleep()
+            time.sleep(1)
             print("dentro del iframe")
             driver.find_element_by_id("sidepanelsearchsigacontrol").click()
             time.sleep(2)
@@ -102,7 +102,10 @@ class UntitledTestCase(unittest.TestCase):
             time.sleep(2)
 
             #buscar
-            driver.find_element_by_xpath("//html/body/form/div[3]/div[4]/div/div/div[9]/div/a").click()
+            print("buscar")
+            driver.find_element_by_xpath("//a[@class='btn btn-default btn-block text-white clean-button'][contains(.,'Buscar')]").click()
+            print("buscar 2")
+            #driver.find_element_by_xpath("//html/body/form/div[3]/div[4]/div/div/div[9]/div/a").click()
             time.sleep(2)
 
             #Primera opcion
@@ -110,14 +113,22 @@ class UntitledTestCase(unittest.TestCase):
             driver.switch_to.default_content()
             time.sleep(3)
 
+            #Ventana emergente
+            aceptarModal = driver.find_element_by_xpath("//span[@class='mat-button-wrapper'][contains(.,'Aceptar')]").is_displayed()
+            print("modal ventana")
+            print(aceptarModal)
+            driver.find_element_by_xpath("//span[@class='mat-button-wrapper'][contains(.,'Aceptar')]").click()
+
+            #if aceptarModal == "True":
+             #   driver.find_element_by_xpath("//span[@class='mat-button-wrapper'][contains(.,'Aceptar')]").click()
+
             #catalogoclave
-            driver.find_element_by_xpath(
-                "/html/body/app-my-app/app-home-operador/div/div[2]/div[3]/app-crear-evento/div/form/div[2]/div[1]/mat-form-field/div/div[1]/div[3]").click()
+            driver.find_element_by_xpath("/html/body/app-root/app-home-operador/div/div[2]/div[3]/app-crear-evento/div/form/div[3]/div/app-select-search/mat-form-field/div/div[1]/div[3]").click()
+            print("abrio el catalogo")
             time.sleep(3)
             # print(evencercano.is_displayed())
 
             #Abandono animal
-            #driver.find_element_by_xpath("//*[@id='mat-option-23']/span").click()
             driver.find_element_by_xpath("//span[@class='mat-option-text'][contains(text(),'ABANDONO-ANIMAL')]").click()
             time.sleep(2)
 
@@ -136,30 +147,31 @@ class UntitledTestCase(unittest.TestCase):
 
             #Descripcion del incidente
             driver.find_element_by_xpath("//span[contains(text(),'ENVIAR A DESPACHO')]").click()
-            time.sleep(2)
+            time.sleep(3)
             print("Btn enviar a despacho")
 
             #PersonsaInvolucradas
+            print("incia personas")
             driver.find_element_by_xpath("//div[@class='grid contendor3Columnas contenedor-altura-maxima']//button[1]//span[1]//img[1]").click()
             time.sleep(4)
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(4)
-            TipoPersona = driver.find_element_by_xpath("/html/body/app-my-app/app-personas-involucradas/div/app-personas-involucradas-form/div/div[2]/app-persona-involucrada-form/form/div[2]/div[1]/app-select-search/mat-form-field/div/div[1]/div[3]/mat-select/div/div[2]").click()
+            TipoPersona = driver.find_element_by_xpath("//mat-select[@id='mat-select-0']//div[@class='mat-select-arrow']").click()
             if TipoPersona is not None:
                 print("Tipo de persona seleccionada" + TipoPersona)
-            #TipoPersonaSelec = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div/div/div/mat-option[2]/span").click()
             TipoPersonaSelec = driver.find_element_by_xpath("//span[@class='mat-option-text'][contains(text(),'VÍCTIMA')]").click()
             driver.find_element_by_xpath("//span[contains(text(),'Agregar')]").click()
-
             time.sleep(3)
             #driver.find_element_by_xpath("/html/body/div[2]/div[2]/div/div/div/mat-option[2]/span").click()
-            time.sleep(4)
             driver.close()
             time.sleep(4)
+            print("termona personas")
             driver.switch_to.window(driver.window_handles[0])
 
             #Objeto involucrado
-            driver.find_element_by_xpath("/html[1]/body[1]/app-my-app[1]/app-home-operador[1]/div[1]/div[2]/div[3]/app-crear-evento[1]/div[1]/form[1]/div[4]/div[2]/div[1]/div[1]/button[4]/span[1]/img[1]").click()
+            print("incia objeto")
+            #driver.find_element_by_xpath("/html[1]/body[1]/app-my-app[1]/app-home-operador[1]/div[1]/div[2]/div[3]/app-crear-evento[1]/div[1]/form[1]/div[4]/div[2]/div[1]/div[1]/button[4]/span[1]/img[1]").click()
+            driver.find_element_by_xpath("//div[@class='grid contendor3Columnas contenedor-altura-maxima']//button[4]//span[1]//img[1]").click()
             time.sleep(3)
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(2)
@@ -217,9 +229,15 @@ class UntitledTestCase(unittest.TestCase):
             print("Vehículos involucrados registrado")
 
             #dinero involucrado
-            driver.find_element_by_xpath("/html/body/app-my-app/app-home-operador/div/div[2]/div[3]/app-crear-evento/div/form/div[4]/div[2]/div/div/button[5]/span/mat-icon").click()
+            print("Encontrando el icono dinero")
+            #driver.find_element_by_xpath("//mat-select[@id='mat-select-0']//div[@class='mat-select-arrow-wrapper']").click()
+            driver.find_element_by_xpath("//mat-icon[contains(normalize-space(),'attach_money')]").click()
+            #driver.find_element_by_xpath("//mat-icon[@class='mat-icon notranslate material-icons mat-icon-no-color'][contains(.,'attach_money')]").click()
+            print("Si encotro el boton")
+            #driver.find_element_by_xpath("//div[@class='grid contendor3Columnas contenedor-altura-maxima']//button[5]//span[1]//img[1]").click()
             time.sleep(3)
             #abre la nueva ventana
+            print("Abriendo la ventana")
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(3)
             #*Tipo de moneda
@@ -245,9 +263,10 @@ class UntitledTestCase(unittest.TestCase):
             time.sleep(3)
 
             #Descripciones del incidente
-            driver.find_element_by_id("mat-input-11").send_keys("DESCRIPCION 123PROBANDO")
+            #Agregando descripcion
+            driver.find_element_by_id("mat-input-15").send_keys("DESCRIPCION 123PROBANDO")
             time.sleep(3)
-            driver.find_element_by_id("mat-input-11").send_keys(Keys.ENTER)
+            driver.find_element_by_id("mat-input-15").send_keys(Keys.ENTER)
             time.sleep(4)
 
             desciption = driver.find_element_by_id("descripcion")
@@ -271,17 +290,23 @@ class UntitledTestCase(unittest.TestCase):
             #log.write("Fecha de generación: " + time.strftime("%d/%m/%y") + "\n" + "Hora de ejecución: " + fecha2 + "\n" + "Folio: " + obtienefolio.text + "\n" + "Descripción: " + "\n" + desciption.text)
             #log.write("\n-------------------------------------------------------\n")
             #log.close()
-            print("Log archivos")
-            archivo_log(fecha2, obtienefolio, desciption)
-            print("Log archivos 202020")
-            print(desciption.text)
+            #print("Log archivos")
+            #archivo_log(fecha2, obtienefolio, desciption)
+            #print("Log archivos 202020")
+            #print(desciption.text)
 
-            driver.find_element_by_xpath(
-                "/html/body/app-my-app/app-home-operador/div/div[2]/div[3]/app-crear-evento/div/div[2]/button/span/span").click()
+            print("Click boton GUARDAR")
+            driver.find_element_by_xpath("//span[@class='botton-text'][contains(.,'GUARDAR')]").click()
+            print("BTN GUARDAR")
+
+            print("alerta de pantalla")
+            #driver.find_element_by_xpath("/html/body/app-my-app/app-home-operador/div/div[2]/div[3]/app-crear-evento/div/div[2]/button/span/span").click()
             time.sleep(4)
             driver.find_element_by_xpath("//span[text()='ACEPTAR']").click()
+            #driver.find_element_by_xpath("").click()
             time.sleep(4)
 
+            print("cerrando iframe")
             driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='siga']"))
             time.sleep(2)
             print("regresando al iframe")
