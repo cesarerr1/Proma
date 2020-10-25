@@ -26,8 +26,8 @@ def archivo_log_tiempos(text):
     return True
 
 class UntitledTestCase(unittest.TestCase):
-    def setUp(self):
 
+    def setUp(self):
         self.driver = webdriver.Chrome("C:\dchrome\chromedriver.exe")
         self.driver.set_window_size(1400, 1000)
         self.driver.implicitly_wait(30)
@@ -37,7 +37,8 @@ class UntitledTestCase(unittest.TestCase):
 
     def test_cerrar_evento(self):
         driver = self.driver
-        driver.get("http://demos-promad.opensystems.mx:9191")
+        host = "http://52.9.236.138:9596"
+        driver.get(host)
         wait = WebDriverWait(driver, 15)
         # Almacena el ID de la ventana original
         win_ser_local = driver.current_window_handle
@@ -47,7 +48,7 @@ class UntitledTestCase(unittest.TestCase):
 
         # USUARIO
         usuario = driver.find_element_by_id("mat-input-0")
-        usuario.send_keys("QA05")
+        usuario.send_keys("DEV02")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
 

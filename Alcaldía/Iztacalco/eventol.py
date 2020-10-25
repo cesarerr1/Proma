@@ -39,7 +39,7 @@ class UntitledTestCase(unittest.TestCase):
     def test_cerrar_evento(self):
         driver = self.driver
         #driver.get("http://qa-promad.opensystems.mx/")
-        driver.get("http://10.50.16.11:9191")
+        driver.get("http://52.9.236.138:9596/login")
         wait = WebDriverWait(driver, 15)
         # Almacena el ID de la ventana original
         win_ser_local = driver.current_window_handle
@@ -49,13 +49,13 @@ class UntitledTestCase(unittest.TestCase):
 
         # USUARIO
         usuario = driver.find_element_by_id("mat-input-0")
-        usuario.send_keys("IZC04")
+        usuario.send_keys("DEV02")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
 
         # CENTRO
         centro = driver.find_element_by_id("mat-input-1")
-        centro.send_keys("IZC")
+        centro.send_keys("C5")
         centro.send_keys(Keys.ENTER)
         time.sleep(1)
 

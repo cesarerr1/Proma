@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
-import HtmlTestRunner
+#import HtmlTestRunner
 from tkinter import *
 import unittest, time, re
 
@@ -169,8 +169,6 @@ class UntitledTestCase(unittest.TestCase):
             driver.switch_to.window(win_ser_local)
             time.sleep(5)
             i += 1
-
-
 
 
     def is_element_present(self, how, what):

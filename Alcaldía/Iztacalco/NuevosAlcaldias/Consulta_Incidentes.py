@@ -40,7 +40,7 @@ class UntitledTestCase(unittest.TestCase):
 
     def test_cerrar_evento(self):
         driver = self.driver
-        driver.get("http://52.9.236.138:9596")
+        driver.get("http://qa-promad.opensystems.mx/")
         wait = WebDriverWait(driver, 15)
         # Almacena el ID de la ventana original
         win_ser_local = driver.current_window_handle

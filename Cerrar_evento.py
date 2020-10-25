@@ -182,9 +182,6 @@ class UntitledTestCase(unittest.TestCase):
             time.sleep(5)
             i += 1
 
-
-
-
     def is_element_present(self, how, what):
         try:
             self.driver.find_element(by=how, value=what)

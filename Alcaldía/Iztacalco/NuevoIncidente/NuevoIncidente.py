@@ -40,7 +40,7 @@ class UntitledTestCase(unittest.TestCase):
     def test_cerrar_evento(self):
         driver = self.driver
         #host = "http://10.50.16.11:9191"
-        host = ("http://demos-promad.opensystems.mx:9191")
+        host = ("http://52.9.236.138:9596/login")
         driver.get(host)
         wait = WebDriverWait(driver, 15)
         # Almacena el ID de la ventana original
@@ -52,7 +52,7 @@ class UntitledTestCase(unittest.TestCase):
         # USUARIO
         usuario = driver.find_element_by_id("mat-input-0")
         #usuario.send_keys("IZC04")
-        usuario.send_keys("QA05")
+        usuario.send_keys("DEV02")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
 
@@ -97,7 +97,7 @@ class UntitledTestCase(unittest.TestCase):
 
         # Cambia el controlador a la ventana o pestana original
         driver.switch_to.window(win_ser_local)
-        time.sleep(20)
+        time.sleep(15)
         i = 1
         while i <= 10:
             # EVENTO
